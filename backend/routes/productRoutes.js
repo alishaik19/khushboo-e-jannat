@@ -7,9 +7,11 @@ const auth = require("../middlewares/auth");
 // ===============================
 // 🌐 BASE URL (FIX FOR RENDER + LOCAL)
 // ===============================
-const BASE_URL =
-  process.env.BASE_URL || `http://localhost:${process.env.PORT || 4000}`;
-
+const BASE_URL = (process.env.BASE_URL || "http://localhost:4000").replace(
+  /\/$/,
+  "",
+);
+const imagePath = `/uploads/${req.file.filename}`;
 // ===============================
 // 📁 MULTER CONFIG
 // ===============================
@@ -57,7 +59,7 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
       category,
 
       // ✅ FIXED IMAGE URL (NO MORE LOCALHOST ISSUE)
-      image: `${BASE_URL}uploads/${req.file.filename}`,
+      image: `${BASE_URL}${imagePath}`,
     });
 
     res.status(201).json(product);
@@ -81,7 +83,7 @@ router.put("/:id", auth, upload.single("image"), async (req, res) => {
     };
 
     if (req.file) {
-      updateData.image = `${BASE_URL}uploads/${req.file.filename}`;
+      image: `${BASE_URL}${imagePath}`;
     }
 
     const updated = await Product.findByIdAndUpdate(req.params.id, updateData, {
