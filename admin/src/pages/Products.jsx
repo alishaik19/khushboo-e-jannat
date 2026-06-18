@@ -84,7 +84,7 @@ function Products() {
 
         alert("Product Updated Successfully ✅");
       } else {
-        await axios.post(`${API__URL}/api/products`, formData, {
+        await axios.post(`${API_URL}/api/products`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
