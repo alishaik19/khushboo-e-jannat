@@ -5,13 +5,13 @@ const Product = require("../models/Product");
 const auth = require("../middlewares/auth");
 
 // ===============================
-// 🌐 BASE URL (FIX FOR RENDER + LOCAL)
+// 🌐 BASE URL
 // ===============================
 const BASE_URL = (process.env.BASE_URL || "http://localhost:4000").replace(
   /\/$/,
   "",
 );
-const imagePath = `/uploads/${req.file.filename}`;
+
 // ===============================
 // 📁 MULTER CONFIG
 // ===============================
@@ -46,10 +46,12 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
     const { name, price, description, status, category } = req.body;
 
     if (!name || !price || !req.file) {
-      return res.status(400).json({
-        message: "Name, price and image are required",
-      });
+      return res
+        .status(400)
+        .json({ message: "Name, price and image required" });
     }
+
+    const imageUrl = `${BASE_URL}/uploads/${req.file.filename}`;
 
     const product = await Product.create({
       name,
@@ -57,9 +59,7 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
       description,
       status,
       category,
-
-      // ✅ FIXED IMAGE URL (NO MORE LOCALHOST ISSUE)
-      image: `${BASE_URL}${imagePath}`,
+      image: imageUrl,
     });
 
     res.status(201).json(product);
@@ -83,7 +83,7 @@ router.put("/:id", auth, upload.single("image"), async (req, res) => {
     };
 
     if (req.file) {
-      image: `${BASE_URL}${imagePath}`;
+      updateData.image = `${BASE_URL}/uploads/${req.file.filename}`;
     }
 
     const updated = await Product.findByIdAndUpdate(req.params.id, updateData, {
@@ -137,7 +137,7 @@ router.get("/search", async (req, res) => {
 });
 
 // ===============================
-// 📄 GET SINGLE PRODUCT
+// 📄 SINGLE PRODUCT
 // ===============================
 router.get("/:id", async (req, res) => {
   try {
