@@ -1,0 +1,475 @@
+/* =========================
+   PAGE
+========================= */
+.profile-container {
+  display: flex;
+  gap: 25px;
+  padding: 20px;
+  min-height: 100vh;
+  background: #fffaf5;
+  align-items: flex-start; /* IMPORTANT */
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+.profile-card {
+  width: 320px;
+  height: fit-content; /* IMPORTANT */
+
+  background: #fff;
+  border-radius: 18px;
+
+  padding: 16px;
+
+  text-align: center;
+
+  border: 1px solid rgba(184, 134, 11, 0.15);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.06),
+    0 0 20px rgba(184, 134, 11, 0.05);
+
+  transition: 0.3s;
+}
+
+.profile-card:hover {
+  transform: translateY(-3px);
+}
+
+/* IMAGE */
+.profile-img {
+  width: 85px;
+  height: 85px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 3px solid #b8860b;
+
+  margin-bottom: 8px;
+}
+
+/* NAME */
+.profile-card h2 {
+  font-size: 20px;
+  margin-bottom: 3px;
+  color: #222;
+}
+
+.profile-card input {
+  width: 100%;
+  padding: 8px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ROLE */
+.role {
+  color: #b8860b;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* EMAIL */
+.email {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   SAVED ADDRESS
+========================= */
+.saved-address {
+  margin-top: 10px;
+
+  background: #fff8ea;
+
+  border-radius: 10px;
+
+  padding: 10px;
+
+  text-align: left;
+}
+
+.saved-address h4 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #b8860b;
+}
+
+.saved-address p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #444;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-group {
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-group button {
+  border: none;
+
+  padding: 10px;
+
+  border-radius: 25px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-group button:first-child {
+  background: #b8860b;
+  color: white;
+}
+
+.logout {
+  background: #ff4d4f;
+  color: white;
+}
+
+/* =========================
+   RIGHT SIDE
+========================= */
+.profile-dashboard {
+  flex: 1;
+}
+
+/* QUICK ACTIONS */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.quick-actions button {
+  height: 110px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border: 1px solid rgba(184, 134, 11, 0.15);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+
+  transition: 0.3s;
+}
+
+.quick-actions button:hover {
+  background: #b8860b;
+  color: white;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+.address-modal {
+  width: 420px;
+  max-width: 92%;
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.address-modal input,
+.address-modal textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.address-modal textarea {
+  height: 90px;
+  resize: none;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .profile-card {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .profile-img {
+    width: 75px;
+    height: 75px;
+  }
+
+  .profile-card h2 {
+    font-size: 18px;
+  }
+
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .quick-actions button {
+    height: 80px;
+    font-size: 12px;
+  }
+
+  .saved-address p {
+    font-size: 11px;
+  }
+}
+.quick-actions button {
+  height: 110px;
+
+  border: 1px solid rgba(184, 134, 11, 0.15);
+  border-radius: 16px;
+
+  background: #ffffff;
+  color: #222;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    background 0.45s ease,
+    color 0.45s ease;
+}
+
+/* Luxury Hover */
+.quick-actions button:hover {
+  transform: translateY(-8px);
+
+  background: linear-gradient(
+    135deg,
+    #fffdf7 0%,
+    #fff8e8 50%,
+    #fff3d6 100%
+  );
+
+  color: #b8860b;
+
+  box-shadow:
+    0 15px 35px rgba(184, 134, 11, 0.18),
+    0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Click */
+.quick-actions button:active {
+  transform: scale(0.97);
+}
+
+/* Shine Effect */
+.quick-actions button::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 50%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+
+  transform: skewX(-25deg);
+
+  transition: 0.8s ease;
+}
+
+.quick-actions button:hover::before {
+  left: 160%;
+}
+
+/* Golden Border Animation */
+.quick-actions button::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: 16px;
+
+  border: 1px solid transparent;
+
+  transition: 0.4s ease;
+}
+
+.quick-actions button:hover::after {
+  border-color: rgba(184, 134, 11, 0.4);
+}
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+/* CARD BUTTON */
+.quick-actions button {
+  height: 110px;
+  padding: 10px;
+
+  border: 1px solid rgba(184, 134, 11, 0.15);
+  border-radius: 16px;
+
+  background: #fff;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+
+  transition: all 0.35s ease;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* HOVER (LIGHT GOLD SOFT UI) */
+.quick-actions button:hover {
+  transform: translateY(-5px);
+
+  background: linear-gradient(135deg, #fff6e0, #fdf1d6);
+
+  color: #b8860b;
+
+  box-shadow:
+    0 10px 25px rgba(184, 134, 11, 0.2),
+    0 0 20px rgba(184, 134, 11, 0.1);
+}
+
+/* CLICK EFFECT */
+.quick-actions button:active {
+  transform: scale(0.97);
+}
+
+/* SHINE EFFECT */
+.quick-actions button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: skewX(-25deg);
+  transition: 0.6s;
+}
+
+.quick-actions button:hover::before {
+  left: 140%;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .quick-actions button {
+    height: 90px;
+    font-size: 12px;
+    padding: 8px;
+
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.2;
+  }
+}
+
+/* very small screens */
+@media (max-width: 420px) {
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-actions button {
+    height: 80px;
+    font-size: 11px;
+  }
+}

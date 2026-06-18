@@ -1,0 +1,274 @@
+.orders-section {
+  padding: 50px 0;
+  min-height: 70vh;
+}
+
+.orders-section h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* GRID */
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+/* CARD */
+.order-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+.order-card h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+/* PRODUCT LIST */
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.item-qty {
+  color: #777;
+}
+
+/* TOTAL */
+.price {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #b8860b;
+}
+
+/* STATUS */
+.status {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.placed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status.processing {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.status.delivered {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* EMPTY */
+.empty-box {
+  text-align: center;
+  padding: 40px;
+  border: 2px dashed #ddd;
+  border-radius: 16px;
+  background: #fafafa;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .orders-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .order-card {
+    padding: 8px;
+    min-height: auto;
+  }
+
+  .order-card h3 {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .order-item {
+    font-size: 9px;
+    padding: 3px 0;
+    line-height: 1.2;
+  }
+
+  .order-card hr {
+    margin: 6px 0;
+  }
+
+  .order-card p {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  .status {
+    font-size: 9px;
+    padding: 3px 7px;
+    margin-top: 5px;
+  }
+
+  .cancel-btn {
+    font-size: 9px;
+    padding: 6px;
+    margin-top: 6px;
+  }
+}
+.cancel-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d4f;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background: #d9363e;
+}
+.order-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.order-modal {
+  width: 420px;
+  max-width: 90%;
+
+  background: #fff;
+  color: #000;
+
+  border-radius: 16px;
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+  animation: popup 0.25s ease;
+}
+
+.order-modal h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #222;
+}
+
+.order-modal p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.no-btn {
+  background: #ececec;
+}
+
+.yes-btn {
+  background: #ff4d4f;
+  color: white;
+}
+
+.yes-btn:hover {
+  background: #d9363e;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Placed */
+.status.placed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* Processing */
+.status.processing {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+/* Shipped */
+.status.shipped {
+  background: #ede7f6;
+  color: #6a1b9a;
+}
+
+/* Delivered */
+.status.delivered {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* Cancelled */
+.status.cancelled {
+  background: #ffebee;
+  color: #c62828;
+}

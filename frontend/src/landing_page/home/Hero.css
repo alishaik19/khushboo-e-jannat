@@ -1,0 +1,259 @@
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-section {
+  min-height: 80vh;
+  background: linear-gradient(135deg, #fffaf5, #f8f1e7);
+  padding: 80px 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================
+   TEXT CONTENT
+========================= */
+
+.tagline {
+  color: #b8860b;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #2c1f15;
+  margin-bottom: 15px;
+}
+
+.hero-text h1 span {
+  color: #b8860b;
+}
+
+.description {
+  font-size: 16px;
+  color: #555;
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.hero-buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+
+  border: 2px solid #b8860b;
+  border-radius: 50px;
+
+  color: #b8860b;
+  text-decoration: none;
+  font-weight: 600;
+
+  overflow: hidden;
+  transition: all 0.35s ease;
+
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+  color: white;
+  background: #b8860b;
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 20px rgba(184, 134, 11, 0.25),
+    0 0 20px rgba(184, 134, 11, 0.15);
+}
+.btn-outline::before {
+  content: "";
+
+  position: absolute;
+  top: -50%;
+  left: -120%;
+
+  width: 60%;
+  height: 200%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 245, 220, 0.6),
+    transparent
+  );
+
+  transform: rotate(20deg);
+
+  animation: borderSweep 4s linear infinite;
+}
+
+/* =========================
+   IMAGE SECTION
+========================= */
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  border-radius: 20px;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(184, 134, 11, 0.15);
+
+  animation: floatBottle 5s ease-in-out infinite;
+  transition: transform 0.4s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.03);
+}
+
+@keyframes floatBottle {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* =========================
+   DESKTOP SPACING
+========================= */
+
+.hero-text {
+  z-index: 2;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+  .hero-text h1 {
+    font-size: 40px;
+  }
+
+  .hero-image img {
+    max-width: 320px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: auto;
+    padding: 50px 15px;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 14px;
+    margin: 0 auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image {
+    margin-bottom: 25px;
+  }
+
+  .hero-image img {
+    max-width: 260px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-image img {
+    max-width: 220px;
+  }
+
+  .btn-outline {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+.hero-text h1 span {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: #b8860b;
+}
+
+.hero-text h1 span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 35%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 235, 180, 0.18),
+    rgba(255, 248, 220, 0.28),
+    rgba(255, 235, 180, 0.18),
+    transparent
+  );
+
+  transform: skewX(-25deg);
+
+  animation: luxuryShine 4s infinite;
+}
+
+@keyframes luxuryShine {
+  from {
+    left: -120%;
+  }
+
+  to {
+    left: 150%;
+  }
+}
