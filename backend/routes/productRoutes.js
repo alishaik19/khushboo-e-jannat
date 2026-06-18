@@ -57,7 +57,7 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
       category,
 
       // ✅ FIXED IMAGE URL (NO MORE LOCALHOST ISSUE)
-      image: `${BASE_URL}/uploads/${req.file.filename}`,
+      image: `${BASE_URL}uploads/${req.file.filename}`,
     });
 
     res.status(201).json(product);
@@ -81,7 +81,7 @@ router.put("/:id", auth, upload.single("image"), async (req, res) => {
     };
 
     if (req.file) {
-      updateData.image = `${BASE_URL}/uploads/${req.file.filename}`;
+      updateData.image = `${BASE_URL}uploads/${req.file.filename}`;
     }
 
     const updated = await Product.findByIdAndUpdate(req.params.id, updateData, {
