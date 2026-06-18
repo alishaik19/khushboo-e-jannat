@@ -1,4 +1,4 @@
-import "StatCard/css"
+import "./StatCard.css"
 function StatCard({ icon, title, value, color }) {
   return (
     <div className="stat-card" style={{ borderLeft: `5px solid ${color}` }}>
