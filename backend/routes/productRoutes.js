@@ -5,6 +5,12 @@ const Product = require("../models/Product");
 const auth = require("../middlewares/auth");
 
 // ===============================
+// 🌐 BASE URL (FIX FOR RENDER + LOCAL)
+// ===============================
+const BASE_URL =
+  process.env.BASE_URL || `http://localhost:${process.env.PORT || 4000}`;
+
+// ===============================
 // 📁 MULTER CONFIG
 // ===============================
 const storage = multer.diskStorage({
@@ -31,7 +37,7 @@ router.get("/", async (req, res) => {
 });
 
 // ===============================
-// ➕ ADD PRODUCT (ADMIN ONLY IDEA)
+// ➕ CREATE PRODUCT
 // ===============================
 router.post("/", auth, upload.single("image"), async (req, res) => {
   try {
@@ -49,7 +55,9 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
       description,
       status,
       category,
-      image: `${process.env.BASE_URL}/uploads/${req.file.filename}`,
+
+      // ✅ FIXED IMAGE URL (NO MORE LOCALHOST ISSUE)
+      image: `${BASE_URL}/uploads/${req.file.filename}`,
     });
 
     res.status(201).json(product);
@@ -73,7 +81,7 @@ router.put("/:id", auth, upload.single("image"), async (req, res) => {
     };
 
     if (req.file) {
-      updateData.image = `${process.env.BASE_URL}/uploads/${req.file.filename}`;
+      updateData.image = `${BASE_URL}/uploads/${req.file.filename}`;
     }
 
     const updated = await Product.findByIdAndUpdate(req.params.id, updateData, {
@@ -106,6 +114,10 @@ router.delete("/:id", auth, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// ===============================
+// 🔍 SEARCH PRODUCTS
+// ===============================
 router.get("/search", async (req, res) => {
   try {
     const q = req.query.q;
@@ -121,6 +133,10 @@ router.get("/search", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// ===============================
+// 📄 GET SINGLE PRODUCT
+// ===============================
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -134,4 +150,5 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 module.exports = router;

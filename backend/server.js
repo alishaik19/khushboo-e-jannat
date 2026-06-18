@@ -8,44 +8,58 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// ========================
 // DB CONNECT
+// ========================
 const connectDB = require("./config/db");
 
 // ========================
 // MIDDLEWARE
 // ========================
+
+// JSON middleware
 app.use(express.json());
 
 // ========================
-// CORS CONFIG (FIXED)
+// STATIC FILES (UPLOADS)
+// ========================
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ========================
+// CORS (PRODUCTION FIXED)
 // ========================
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  process.env.ADMIN_URL,
   "http://localhost:5173",
   "http://localhost:5174",
+  "https://khushboo-e-jannat.vercel.app",
+  "https://khushboo-e-jannat-official.vercel.app",
 ];
+
+// remove trailing slash issues
+const normalize = (url) => url?.replace(/\/$/, "");
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (like Postman)
+      // allow tools like Postman
       if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
+      const cleanOrigin = normalize(origin);
+
+      const isAllowed = allowedOrigins.some(
+        (o) => normalize(o) === cleanOrigin
+      );
+
+      if (isAllowed) {
         return callback(null, true);
-      } else {
-        return callback(new Error("CORS not allowed for this origin"));
       }
+
+      console.log("❌ Blocked by CORS:", origin);
+      return callback(null, false); // safe production behavior
     },
     credentials: true,
-  }),
+  })
 );
-
-// ========================
-// STATIC FILES
-// ========================
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ========================
 // ROUTES
@@ -77,6 +91,7 @@ app.get("/", (req, res) => {
 const startServer = async () => {
   try {
     await connectDB();
+
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
