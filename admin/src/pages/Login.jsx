@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+if (!import.meta.env.VITE_API_URL) {
+  console.warn("VITE_API_URL is missing");
+}
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Login() {

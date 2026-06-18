@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
+if (!import.meta.env.VITE_API_URL) {
+  console.warn("VITE_API_URL is missing");
+}
 const API_URL = import.meta.env.VITE_API_URL;
 
 function History() {

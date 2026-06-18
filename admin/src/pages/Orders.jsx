@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Orders.css";
+if (!import.meta.env.VITE_API_URL) {
+  console.warn("VITE_API_URL is missing");
+}
 const API_URL = import.meta.env.VITE_API_URL;
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -15,14 +18,11 @@ function Orders() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await axios.get(
-        `${API_URL}/api/orders/admin/all`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const res = await axios.get(`${API_URL}/api/orders/admin/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
       setOrders(res.data);
     } catch (err) {

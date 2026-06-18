@@ -10,6 +10,9 @@ import {
   FaTimesCircle,
   FaExclamationTriangle,
 } from "react-icons/fa";
+if (!import.meta.env.VITE_API_URL) {
+  console.warn("VITE_API_URL is missing");
+}
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Dashboard() {
