@@ -52,11 +52,21 @@ function Products() {
     }
   };
   // ADD OR UPDATE PRODUCT
+  console.log("Submitting...");
+  console.log("Editing ID:", editingId);
+  console.log("Image:", form.image);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("========== PRODUCT SUBMIT ==========");
+    console.log("Editing ID:", editingId);
+    console.log("Form Data:", form);
+    console.log("Selected Image:", form.image);
+
     try {
       const token = localStorage.getItem("token");
+
+      console.log("Token Exists:", !!token);
 
       if (!token) {
         alert("Admin login required");
@@ -72,27 +82,51 @@ function Products() {
 
       if (form.image) {
         formData.append("image", form.image);
+
+        console.log("Image Name:", form.image.name);
+        console.log("Image Size:", form.image.size);
+        console.log("Image Type:", form.image.type);
+      } else {
+        console.log("❌ No image selected");
       }
 
+      console.log("Sending Request To:", API_URL);
+
+      let response;
+
       if (editingId) {
-        await axios.put(`${API_URL}/api/products/${editingId}`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+        console.log("Updating Product:", editingId);
+
+        response = await axios.put(
+          `${API_URL}/api/products/${editingId}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
           },
-        });
+        );
+
+        console.log("UPDATE RESPONSE:", response.data);
 
         alert("Product Updated Successfully ✅");
       } else {
-        await axios.post(`${API_URL}/api/products`, formData, {
+        console.log("Creating Product");
+
+        response = await axios.post(`${API_URL}/api/products`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
           },
         });
 
+        console.log("CREATE RESPONSE:", response.data);
+
         alert("Product Added Successfully ✅");
       }
+
+      fetchProducts();
 
       setForm({
         name: "",
@@ -105,10 +139,16 @@ function Products() {
       setPreviewImage("");
       setEditingId(null);
       setShowForm(false);
-
-      fetchProducts();
     } catch (error) {
-      console.log("PRODUCT ERROR:", error.response?.data || error);
+      console.log("========== PRODUCT ERROR ==========");
+
+      console.log("Full Error:", error);
+
+      if (error.response) {
+        console.log("Status:", error.response.status);
+        console.log("Response:", error.response.data);
+      }
+
       alert(error.response?.data?.message || "Operation Failed ❌");
     }
   };
