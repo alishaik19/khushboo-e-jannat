@@ -129,10 +129,6 @@ function History() {
                     Return Order
                   </button>
                 )}
-
-                {order.status === "Return Requested" && (
-                  <p className="return-pending">Return Requested ⏳</p>
-                )}
               </div>
             ))}
           </div>
