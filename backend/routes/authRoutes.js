@@ -76,9 +76,17 @@ router.post("/login", async (req, res) => {
 // =========================
 router.post("/forgot-password", async (req, res) => {
   try {
+    console.log("FORGOT PASSWORD HIT");
+    console.log("EMAIL:", req.body.email);
+    console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
+    console.log("EMAIL ENV:", process.env.EMAIL);
+    console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
+
     const { email } = req.body;
 
     const user = await User.findOne({ email });
+
+    console.log("USER FOUND:", user ? "YES" : "NO");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -96,19 +104,22 @@ router.post("/forgot-password", async (req, res) => {
 
     await user.save();
 
-    // 🔥 IMPORTANT: use env frontend url
+    console.log("TOKEN SAVED");
+
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    console.log("RESET URL:", resetUrl);
 
     await sendEmail(
       user.email,
       "Password Reset Link",
       `
-        <h2>Password Reset Request</h2>
-        <p>Click below to reset your password:</p>
-        <a href="${resetUrl}">${resetUrl}</a>
-        <p>This link will expire in 15 minutes.</p>
+      <h2>Password Reset Request</h2>
+      <a href="${resetUrl}">${resetUrl}</a>
       `,
     );
+
+    console.log("EMAIL SENT");
 
     res.json({ message: "Reset link sent to email" });
   } catch (err) {
