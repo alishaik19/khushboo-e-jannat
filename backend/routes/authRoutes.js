@@ -74,7 +74,61 @@ router.post("/login", async (req, res) => {
 // =========================
 // FORGOT PASSWORD
 // =========================
-// =========================
+router.post("/forgot-password", async (req, res) => {
+  try {
+    console.log("FORGOT PASSWORD HIT");
+    console.log("EMAIL:", req.body.email);
+    console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
+    console.log("EMAIL ENV:", process.env.EMAIL);
+    console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
+
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+
+    console.log("USER FOUND:", user ? "YES" : "NO");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+
+    await user.save();
+
+    console.log("TOKEN SAVED");
+
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    console.log("RESET URL:", resetUrl);
+
+    await sendEmail(
+      user.email,
+      "Password Reset Link",
+      `
+      <h2>Password Reset Request</h2>
+      <a href="${resetUrl}">${resetUrl}</a>
+      `,
+    );
+
+    console.log("EMAIL SENT");
+
+    res.json({ message: "Reset link sent to email" });
+  } catch (err) {
+    console.log("FORGOT PASSWORD ERROR:", err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 // RESET PASSWORD
 // =========================
 router.post("/reset-password/:token", async (req, res) => {
@@ -112,10 +166,7 @@ router.post("/reset-password/:token", async (req, res) => {
     }
 
     // ✅ Check if new password is same as old password
-    const isSamePassword = await bcrypt.compare(
-      password,
-      user.password
-    );
+    const isSamePassword = await bcrypt.compare(password, user.password);
 
     if (isSamePassword) {
       return res.status(400).json({
@@ -140,53 +191,6 @@ router.post("/reset-password/:token", async (req, res) => {
     res.status(500).json({
       message: err.message,
     });
-  }
-});
-
-// =========================
-// RESET PASSWORD
-// =========================
-router.post("/reset-password/:token", async (req, res) => {
-  try {
-    const { password } = req.body;
-
-    const strongPasswordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
-
-    if (!password) {
-      return res.status(400).json({ message: "Password is required" });
-    }
-
-    if (!strongPasswordRegex.test(password)) {
-      return res.status(400).json({
-        message:
-          "Password must be 8+ chars with uppercase, lowercase, number & special char",
-      });
-    }
-
-    const hashedToken = crypto
-      .createHash("sha256")
-      .update(req.params.token)
-      .digest("hex");
-
-    const user = await User.findOne({
-      resetPasswordToken: hashedToken,
-      resetPasswordExpire: { $gt: Date.now() },
-    });
-
-    if (!user) {
-      return res.status(400).json({ message: "Invalid or expired token" });
-    }
-
-    user.password = await bcrypt.hash(password, 10);
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
-
-    await user.save();
-
-    res.json({ message: "Password updated successfully" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
 });
 
