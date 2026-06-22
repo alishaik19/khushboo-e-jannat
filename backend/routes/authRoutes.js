@@ -74,57 +74,72 @@ router.post("/login", async (req, res) => {
 // =========================
 // FORGOT PASSWORD
 // =========================
-router.post("/forgot-password", async (req, res) => {
+// =========================
+// RESET PASSWORD
+// =========================
+router.post("/reset-password/:token", async (req, res) => {
   try {
-    console.log("FORGOT PASSWORD HIT");
-    console.log("EMAIL:", req.body.email);
-    console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
-    console.log("EMAIL ENV:", process.env.EMAIL);
-    console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
+    const { password } = req.body;
 
-    const { email } = req.body;
+    const strongPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-    const user = await User.findOne({ email });
-
-    console.log("USER FOUND:", user ? "YES" : "NO");
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
     }
 
-    const resetToken = crypto.randomBytes(32).toString("hex");
+    if (!strongPasswordRegex.test(password)) {
+      return res.status(400).json({
+        message:
+          "Password must be 8+ chars with uppercase, lowercase, number & special char",
+      });
+    }
 
     const hashedToken = crypto
       .createHash("sha256")
-      .update(resetToken)
+      .update(req.params.token)
       .digest("hex");
 
-    user.resetPasswordToken = hashedToken;
-    user.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+    const user = await User.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    }).select("+password");
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid or expired token",
+      });
+    }
+
+    // ✅ Check if new password is same as old password
+    const isSamePassword = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (isSamePassword) {
+      return res.status(400).json({
+        message: "New password cannot be the same as your current password",
+      });
+    }
+
+    // ✅ Hash new password
+    user.password = await bcrypt.hash(password, 10);
+
+    // ✅ Clear reset token
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
 
     await user.save();
 
-    console.log("TOKEN SAVED");
-
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
-
-    console.log("RESET URL:", resetUrl);
-
-    await sendEmail(
-      user.email,
-      "Password Reset Link",
-      `
-      <h2>Password Reset Request</h2>
-      <a href="${resetUrl}">${resetUrl}</a>
-      `,
-    );
-
-    console.log("EMAIL SENT");
-
-    res.json({ message: "Reset link sent to email" });
+    res.json({
+      message: "Password updated successfully",
+    });
   } catch (err) {
-    console.log("FORGOT PASSWORD ERROR:", err);
-    res.status(500).json({ message: err.message });
+    console.log("RESET PASSWORD ERROR:", err);
+    res.status(500).json({
+      message: err.message,
+    });
   }
 });
 
