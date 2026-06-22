@@ -43,7 +43,7 @@ function Hero() {
             className="col-lg-6 text-center hero-image mb-4 mb-lg-0"
             data-aos="zoom-in"
           >
-            <img src="/offerHome.webp" alt="Attar Bottle" />
+            <img src="/heroAttar.png" alt="Attar Bottle" />
           </div>
         </div>
       </div>

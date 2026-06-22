@@ -1,0 +1,96 @@
+.notfound {
+  height: 90vh; /* 🔥 NO SCROLL */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f6f7fb; /* same as your order page background */
+  overflow: hidden; /* extra safety */
+}
+
+/* CARD */
+.notfound-card {
+  position: relative;
+  text-align: center;
+
+  width: 420px;
+  max-width: 92%;
+
+  padding: 40px 25px;
+  border-radius: 18px;
+
+  background: #fff;
+  border: 1px solid #ececec;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* soft glow effect */
+.glow {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+
+  width: 150px;
+  height: 150px;
+
+  background: rgba(255, 77, 79, 0.15);
+  filter: blur(40px);
+  border-radius: 50%;
+}
+
+/* 404 */
+.notfound-card h1 {
+  font-size: 5rem;
+  margin: 0;
+  color: #ff4d4f; /* your theme red */
+}
+
+/* title */
+.notfound-card h2 {
+  font-size: 1.6rem;
+  margin: 8px 0;
+  color: #222;
+}
+
+/* text */
+.notfound-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* buttons */
+.btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btns button {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* secondary */
+.btns button:first-child {
+  background: #f2f2f2;
+  color: #333;
+}
+
+/* primary */
+.btns button:last-child {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+.btns button:hover {
+  transform: translateY(-2px);
+}

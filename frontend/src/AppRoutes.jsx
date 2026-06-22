@@ -13,6 +13,7 @@ import Contact from "./landing_page/contact/Contact";
 import History from "./landing_page/history/History";
 import Checkout from "./Checkout";
 import PageTransition from "./PageTransition";
+import NotFound from "./NotFound";
 import Signup from "./landing_page/account/Signup";
 import Login from "./landing_page/account/Login";
 import ForgotPassword from "./landing_page/account/ForgotPassword";
@@ -145,6 +146,16 @@ function AppRoutes() {
               <ProtectedRoute>
                 <PageTransition>
                   <Profile />
+                </PageTransition>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <ProtectedRoute>
+                <PageTransition>
+                  <NotFound />
                 </PageTransition>
               </ProtectedRoute>
             }
