@@ -1,304 +1,517 @@
 .history-section {
-  padding: 60px 0;
-  min-height: 80vh;
+  height: 90vh; /* 🔥 reduced height */
   background: #f8f9fb;
+
+  display: flex;
+  justify-content: center; /* 🔥 center horizontally */
+  align-items: center; /* 🔥 center vertically */
+
+  overflow: hidden;
 }
 
+/* MAIN CONTAINER */
+.history-container {
+  width: 92%; /* 🔥 controlled width */
+  max-width: 1100px;
+  height: 85vh; /* 🔥 inner height reduced */
+
+  display: flex;
+  flex-direction: column;
+
+  background: transparent;
+}
+
+/* TITLE */
 .history-title {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 35px;
+
+  margin: 10px 0 15px;
   color: #222;
 }
 
-.history-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 24px;
-}
+/* SCROLL AREA */
+.history-table-wrapper {
+  flex: 1;
+  overflow-y: auto;
 
-.history-card {
+  padding: 10px;
+
   background: white;
   border-radius: 18px;
-  padding: 22px;
-  border-left: 5px solid #b8860b;
+  overscroll-behavior: contain;
+
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  transition: 0.3s ease;
 }
 
-.history-card:hover {
-  transform: translateY(-5px);
+/* TABLE */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.history-order-id {
-  color: #b8860b;
-  font-size: 1rem;
+/* HEADER */
+.history-table th {
+  text-align: left;
+  padding: 12px;
+
+  background: #f8f9fb;
   font-weight: 700;
-  margin-bottom: 15px;
+  font-size: 14px;
+
+  border-bottom: 1px solid #eee;
 }
 
-.history-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
+/* ROW */
+.history-table td {
+  padding: 12px;
+
   border-bottom: 1px solid #f1f1f1;
-}
 
-.history-item:last-child {
-  border-bottom: none;
-}
-
-.history-item-name {
+  font-size: 14px;
   color: #333;
-  font-weight: 500;
+
+  vertical-align: top;
 }
 
-.history-item-price {
-  color: #666;
-}
-
-.history-total {
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: 700;
-  color: #111;
-}
-
-.history-date {
+/* ITEMS */
+.table-item {
   display: block;
-  margin-top: 12px;
-  color: #777;
   font-size: 13px;
+  margin-bottom: 4px;
+  color: #444;
 }
 
-.history-status {
+/* STATUS */
+.status {
   display: inline-block;
-  margin-top: 12px;
-  padding: 7px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
+
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-.history-status.delivered {
+/* COLORS */
+.status.delivered {
   background: #e8f5e9;
   color: #2e7d32;
 }
 
-.history-status.cancelled {
+.status.cancelled {
   background: #ffebee;
   color: #c62828;
 }
 
-.history-empty {
-  text-align: center;
-  padding: 50px;
-  background: white;
-  border-radius: 18px;
-  border: 2px dashed #ddd;
-}
-
-@media (max-width: 768px) {
-  .history-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .history-card {
-    padding: 10px;
-    border-radius: 12px;
-    min-height: 185px;
-  }
-
-  .history-card h3 {
-    font-size: 10px;
-    margin-bottom: 6px;
-  }
-
-  .history-card p {
-    font-size: 9px;
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-
-  .history-card hr {
-    margin: 6px 0;
-  }
-
-  .history-card small {
-    display: block;
-    font-size: 8px;
-    margin-top: 4px;
-  }
-
-  .status {
-    font-size: 9px;
-    padding: 3px 7px;
-    margin-top: 5px;
-  }
-
- .return-btn {
-    width: 100%;
-    margin: 6px 0 0px 0px;
-
-    padding: 5px;
-    font-size: 8px;
-
-    box-sizing: border-box;
-  }
-  .return-pending {
-    font-size: 8px;
-    margin-top: 6px;
-    text-align: center;
-  }
-
-  .history-title {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-  }
-}
-
-
-/* POPUP OVERLAY */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-/* POPUP BOX */
-.popup-box {
-  background: white;
-  padding: 20px;
-  width: 350px;
-  border-radius: 10px;
-  text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.popup-box textarea {
-  width: 100%;
-  height: 80px;
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.popup-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.popup-actions button {
-  padding: 6px 12px;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.popup-actions button:first-child {
-  background: #ccc;
-}
-
-.popup-actions button:last-child {
-  background: #28a745;
-  color: white;
-}
-
-@keyframes fadeIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-box {
-  width: 380px;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  text-align: center;
-  animation: pop 0.2s ease-in-out;
-}
-
-@keyframes pop {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.modal-box textarea {
-  width: 100%;
-  height: 90px;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.modal-actions button {
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-.return-btn {
-  background: orange;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 10px;
-  
-}
 .status.returnrequested {
+  background: #fff3e0;
   color: #ff9800;
 }
 
 .status.returnprocessing {
+  background: #e3f2fd;
   color: #2196f3;
 }
 
 .status.returned {
+  background: #e8f5e9;
   color: #4caf50;
 }
 
 .status.returnrejected {
+  background: #ffebee;
   color: #f44336;
+}
+
+/* BUTTON */
+.return-btn {
+  background: orange;
+  color: white;
+
+  border: none;
+  padding: 7px 10px;
+
+  border-radius: 6px;
+  cursor: pointer;
+
+  font-size: 13px;
+}
+
+/* EMPTY */
+.history-empty {
+  text-align: center;
+  padding: 40px;
+  background: white;
+
+  border-radius: 18px;
+  border: 2px dashed #ddd;
+}
+
+/* SCROLLBAR */
+.history-table-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-table-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .history-container {
+    width: 95%;
+  }
+
+  .history-title {
+    font-size: 1.4rem;
+  }
+
+  .history-table th,
+  .history-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+.return-btn {
+  background: linear-gradient(135deg, #ff9800, #ff6d00);
+  color: white;
+
+  border: none;
+  outline: none;
+
+  padding: 8px 14px;
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.25);
+}
+
+.return-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 152, 0, 0.35);
+}
+
+.return-btn:active {
+  transform: scale(0.96);
+}
+/* =========================
+   OVERLAY (FULL SCREEN LOCK)
+========================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 99999;
+
+  padding: 20px;
+}
+/* =========================
+   MODAL BOX
+========================= */
+.modal-box {
+  width: 100%;
+  max-width: 420px;
+
+  background: #ffffff;
+  color: #111;
+
+  border-radius: 16px;
+
+  padding: 24px;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+
+  animation: modalPop 0.25s ease;
+
+  text-align: center;
+}
+/* =========================
+   HEADINGS + TEXT
+========================= */
+.modal-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.modal-box p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+/* =========================
+   TEXTAREA
+========================= */
+.modal-box textarea {
+  width: 100%;
+  height: 90px;
+
+  padding: 12px;
+
+  border-radius: 10px;
+  border: 1px solid #ddd;
+
+  font-size: 14px;
+
+  resize: none;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.modal-box textarea:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.15);
+}
+/* =========================
+   BUTTON ROW
+========================= */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 18px;
+}
+/* =========================
+   BUTTONS
+========================= */
+.modal-actions button {
+  flex: 1;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+  border: none;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  user-select: none;
+}
+
+/* CANCEL / NO */
+.modal-actions button:first-child {
+  background: #e5e5e5;
+  color: #333;
+}
+
+.modal-actions button:first-child:hover {
+  background: #d6d6d6;
+}
+
+/* PRIMARY (YES / SUBMIT) */
+.modal-actions button:last-child {
+  background: linear-gradient(135deg, #ff9800, #ff6d00);
+  color: #fff;
+
+  box-shadow: 0 6px 15px rgba(255, 152, 0, 0.25);
+}
+
+.modal-actions button:last-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 152, 0, 0.35);
+}
+
+.modal-actions button:active {
+  transform: scale(0.97);
+}
+
+/* DISABLED */
+.modal-actions button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes modalPop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* 🔥 FIXED FIRST ROW (STICKY HEADER) */
+.history-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  background: #f8f9fb; /* same as your UI */
+}
+
+/* ensure scroll works properly */
+.history-table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+
+  padding: 0; /* 🔥 FIXED: remove gap causing offset */
+
+  background: white;
+  border-radius: 18px;
+
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+/* =========================
+   HISTORY FIXES
+========================= */
+
+/* Date + Time column */
+.date-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1.1;
+}
+
+.date-time span:last-child {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Items column wrap */
+.history-table td:nth-child(3) {
+  white-space: normal;
+  word-break: break-word;
+  min-width: 220px;
+}
+
+.table-item {
+  display: block;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+/* Better scrolling */
+.history-table-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.history-table {
+  table-layout: auto;
+}
+
+/* Sticky header */
+.history-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f8f9fb;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .history-section {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    align-items: flex-start;
+    padding: 15px 0;
+  }
+
+  .history-container {
+    width: 95%;
+    height: auto;
+    min-height: 85vh;
+  }
+
+  .history-title {
+    font-size: 1.5rem;
+  }
+
+  .history-table-wrapper {
+    max-height: 75vh;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+
+  .history-table {
+    min-width: 750px;
+  }
+
+  .history-table th,
+  .history-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .status {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .return-btn {
+    min-width: 90px;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .history-title {
+    font-size: 1.3rem;
+  }
+
+  .history-table th,
+  .history-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .status {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .return-btn {
+    min-width: 80px;
+    font-size: 11px;
+  }
 }
