@@ -16,24 +16,24 @@ function Team() {
   }, []);
   const members = [
     {
-      name: "Ali Shaikh",
+      name: "Ali Sheikh",
       role: "Founder & Creator",
-      image: "/ali.jpeg",
+      image: "/ali2.jpg",
     },
     {
-      name: "Ayaan Khan",
+      name: "Aryan Khan",
       role: "Fragrance Specialist",
-      image: "/team1.jpg",
+      image: "/aryan.jpg",
     },
     {
       name: "Zaid Ansari",
       role: "Quality Expert",
-      image: "/team2.jpg",
+      image: "/zaid.jpg",
     },
     {
       name: "Arham Sheikh",
       role: "Customer Experience",
-      image: "/team3.jpg",
+      image: "/arham.jpg",
     },
   ];
 

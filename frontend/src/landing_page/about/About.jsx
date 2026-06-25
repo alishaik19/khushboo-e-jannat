@@ -79,7 +79,7 @@ function About() {
 
             <h2>Meet The Founder</h2>
 
-            <h3>Ali Shaikh</h3>
+            <h3>Ali Sheikh</h3>
 
             <p>
               “Khushboo-e-Jannat is my passion to revive the timeless art of

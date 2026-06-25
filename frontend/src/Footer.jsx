@@ -174,7 +174,7 @@ function Footer() {
                 ➔
               </button>
             </div>
-            <p className="newsletter-text mt-3">Developed By ~ Ali Shaikh</p>
+            <p className="newsletter-text mt-3">Developed By ~ Ali Sheikh</p>
           </div>
         </div>
       </div>
