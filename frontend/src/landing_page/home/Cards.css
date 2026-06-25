@@ -1,6 +1,6 @@
 .cards-section {
   padding: 60px 0;
-  background: #fffaf5;
+  background: transparent;
 }
 
 .section-title {
@@ -21,7 +21,7 @@
 /* CARD */
 .product-card {
   position: relative;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.65);
   border-radius: 18px;
   overflow: hidden;
 

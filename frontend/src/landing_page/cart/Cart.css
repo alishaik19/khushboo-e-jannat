@@ -151,23 +151,83 @@ h2 {
   justify-content: center;
 } */
 /* RESPONSIVE */
+/* =========================
+   MOBILE FIX (IMPORTANT)
+========================= */
 @media (max-width: 600px) {
+
+  .cart-list {
+    padding: 10px;
+  }
+
   .cart-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  /* IMAGE */
+  .cart-item img {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+  }
+
+  /* TEXT AREA FIX (MOST IMPORTANT) */
+  .cart-item h4 {
+    font-size: 13px;
+    line-height: 1.3;
+    margin: 0;
+
+    flex: 1;
+    min-width: 0;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cart-item p {
+    font-size: 12px;
+    margin: 2px 0;
+  }
+
+  /* RIGHT SIDE BLOCK */
+  .cart-info {
+    display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  /* QTY */
+  .qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .qty-controls button {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .qty-controls span {
+    font-size: 12px;
+    min-width: 16px;
     text-align: center;
   }
 
-  .cart-item div {
-    justify-content: center;
+  /* DELETE BUTTON */
+  .delete-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+    white-space: nowrap;
   }
-}
-.empty-cart {
-  text-align: center;
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
 }
 
 /* image */

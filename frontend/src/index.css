@@ -17,3 +17,22 @@ a {
 .Toastify__toast-container {
   z-index: 99999 !important;
 }
+:root {
+  --heading-color: #1f140d; /* Dark rich brown */
+  --text-color: #3d3127; /* Paragraphs */
+  --light-text: #5b4d41; /* Secondary text */
+  --accent-color: #a87409; /* Premium gold */
+  --card-bg: rgba(255, 250, 245, 0.82);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+}
+
+p {
+  color: var(--text-color);
+}

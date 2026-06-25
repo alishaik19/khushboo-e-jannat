@@ -6,7 +6,7 @@
   gap: 25px;
   padding: 20px;
   min-height: 100vh;
-  background: #fffaf5;
+  background: transparent;
   align-items: flex-start; /* IMPORTANT */
 }
 
@@ -17,7 +17,7 @@
   width: 320px;
   height: fit-content; /* IMPORTANT */
 
-  background: #fff;
+  background: rgba(255, 255, 255, 0.65);
   border-radius: 18px;
 
   padding: 16px;
@@ -87,7 +87,7 @@
 .saved-address {
   margin-top: 10px;
 
-  background: #fff8ea;
+  background: rgba(255, 255, 255, 0.65);
 
   border-radius: 10px;
 
@@ -163,7 +163,7 @@
   border: none;
   border-radius: 16px;
 
-  background: white;
+  background: transparent;
 
   font-size: 15px;
   font-weight: 600;
@@ -280,7 +280,7 @@
   border: 1px solid rgba(184, 134, 11, 0.15);
   border-radius: 16px;
 
-  background: #ffffff;
+  background: transparent;
   color: #222;
 
   font-size: 15px;
@@ -338,12 +338,7 @@
   width: 50%;
   height: 100%;
 
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.8),
-    transparent
-  );
+  background: transparent;
 
   transform: skewX(-25deg);
 
@@ -385,7 +380,7 @@
   border: 1px solid rgba(184, 134, 11, 0.15);
   border-radius: 16px;
 
-  background: #fff;
+  background: rgba(255, 255, 255, 0.65);
 
   font-size: 14px;
   font-weight: 600;

@@ -40,10 +40,10 @@ function Hero() {
           </div>
 
           <div
-            className="col-lg-6 text-center hero-image mb-4 mb-lg-0"
+            className="col-12 col-lg-6 text-center story-right"
             data-aos="zoom-in"
           >
-            <img src="/heroAttar.png" alt="Attar Bottle" />
+            <img src="/attarAbout.png" alt="Attar Bottle" />
           </div>
         </div>
       </div>

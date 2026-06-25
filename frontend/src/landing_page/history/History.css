@@ -1,6 +1,6 @@
 .history-section {
   height: 90vh; /* 🔥 reduced height */
-  background: #f8f9fb;
+  background: transparent;
 
   display: flex;
   justify-content: center; /* 🔥 center horizontally */

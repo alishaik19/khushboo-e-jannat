@@ -47,8 +47,8 @@ function Cart() {
   };
 
   return (
-    <div className="container cart-page mt-5 ">
-      <h2>My Cart</h2>
+    <div className="container cart-page ">
+      <h2 className="mt-5">My Cart</h2>
 
       {/* EMPTY CART UI */}
       {cart.length === 0 ? (

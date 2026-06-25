@@ -5,13 +5,13 @@
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(135deg, #f8f1e7, #fff);
+  background: transparent;
 }
 
 /* CARD */
 .auth-box {
   width: 380px;
-  background: white;
+  background: rgba(255, 255, 255, 0.65);
   padding: 30px;
 
   border-radius: 15px;

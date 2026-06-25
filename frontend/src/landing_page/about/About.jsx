@@ -1,68 +1,95 @@
 import "./About.css";
-
+import CustomerTrust from "./CustomerTrust";
+import Team from "./Team";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 function About() {
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+      once: false,
+      mirror: true,
+      offset: 120,
+    });
+
+    setTimeout(() => {
+      AOS.refreshHard();
+    }, 100);
+  }, []);
   return (
     <div className="about-page">
       {/* HERO (FULL HEIGHT) */}
-      <section className="about-hero">
-        <div className="hero-content">
-          <h1>Khushboo-e-Jannat</h1>
-          <p>Not just a fragrance — it's an emotion crafted in every drop.</p>
-        </div>
-      </section>
-
-      {/* BRAND STORY */}
       <section className="about-story">
-        <div className="container">
-          <div className="story-card">
-            <h2>🌿 Our Essence</h2>
+        <div className="story-wrapper">
+          <div className="story-left" data-aos="fade-right">
+            <span className="story-tag">OUR STORY</span>
+
+            <h2>
+              Crafted With Tradition,
+              <br />
+              Inspired By Luxury
+            </h2>
+
             <p>
-              We believe fragrance is a memory that stays forever. Our attars
-              are crafted with purity and tradition.
+              At Khushboo-e-Jannat, every fragrance is carefully crafted to
+              blend timeless tradition with modern elegance. We believe attar is
+              not just a scent—it is an emotion that stays with you.
             </p>
+
+            <div className="story-stats">
+              <div>
+                <h3>20+</h3>
+                <span>Premium Attars</span>
+              </div>
+
+              <div>
+                <h3>500+</h3>
+                <span>Happy Customers</span>
+              </div>
+            </div>
           </div>
 
-          <div className="story-card">
-            <h2>✨ Our Vision</h2>
-            <p>
-              To redefine luxury fragrances with affordability and authenticity.
-            </p>
-          </div>
-
-          {/* NEW 2 SECTIONS */}
-          <div className="story-card">
-            <h2>🧪 Craftsmanship</h2>
-            <p>
-              Each bottle is carefully blended using traditional distillation
-              techniques to ensure long-lasting natural aroma.
-            </p>
-          </div>
-
-          <div className="story-card">
-            <h2>🌸 Inspiration</h2>
-            <p>
-              Inspired by nature, emotions, and timeless Mughal perfumery
-              traditions that define elegance.
-            </p>
+          <div className="StoryRight" data-aos="fade-left">
+            <img src="/heroAttar.png" alt="Attar Collection" />
           </div>
         </div>
       </section>
+      <CustomerTrust />
+      <Team />
+      {/* BRAND STORY */}
 
       {/* FOUNDER */}
       <section className="founder-section">
         <div className="container founder-box">
-          <div className="founder-img">
+          <div
+            className="founder-img"
+            data-aos="fade-right"
+            data-aos-duration="700"
+          >
             <img src="/ali.jpeg" alt="Founder" />
           </div>
 
-          <div className="founder-info">
-            <h2>Meet the Founder</h2>
+          <div
+            className="founder-info"
+            data-aos="fade-left"
+            data-aos-duration="700"
+          >
+            <span className="founder-tag">FOUNDER'S MESSAGE</span>
+
+            <h2>Meet The Founder</h2>
+
             <h3>Ali Shaikh</h3>
+
             <p>
-              “Khushboo-e-Jannat is my passion to bring back real fragrance
-              culture with purity and elegance.”
+              “Khushboo-e-Jannat is my passion to revive the timeless art of
+              attars and bring authentic fragrance experiences to everyone.
+              Every bottle is crafted with dedication, purity, and elegance.”
             </p>
-            <span>— Founder & Creator</span>
+
+            <div className="founder-signature">
+              <span>— Founder & Creator</span>
+            </div>
           </div>
         </div>
       </section>
